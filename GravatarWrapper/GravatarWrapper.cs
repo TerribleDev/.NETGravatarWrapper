@@ -32,11 +32,10 @@ namespace GravatarWrapper
             return sBuilder.ToString();  // Return the hexadecimal string. 
         }
 
-        public static Bitmap Request(string email, int size, bool ShowDefaultImage)
+        public static Bitmap Request(string email, int size)
         {
             var client = new RestClient("http://www.gravatar.com/avatar/" + HashEmailForGravatar(email));
             var req = new RestRequest(Method.GET);
-            if (!ShowDefaultImage) req.AddParameter("d", "%22%22" );
             req.AddParameter("s", size);
             var res = client.Execute(req);
             if (res != null)

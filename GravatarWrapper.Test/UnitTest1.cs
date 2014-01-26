@@ -9,10 +9,10 @@ namespace GravatarWrapper.Test
         [TestMethod]
         public void TestMethod1()
         {
-            var req = GravatarWrapper.Request("test@mctest.com", 400, false);
+            var req = GravatarWrapper.Request("tparnell@vistaprint.com", 400);
             if (req != null)
             {
-                req.Save(@"c:\users\test\Desktop\bmp.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                req.Save(@"c:\users\tommy\Desktop\bmp.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
             }
             else
             {
