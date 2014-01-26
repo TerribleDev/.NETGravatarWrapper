@@ -7,6 +7,8 @@ using System.Security.Cryptography;
 using RestSharp;
 using System.Drawing;
 using System.IO;
+using GravatarWrapper;
+using GravatarWrapper.Exceptions;
 
 namespace GravatarWrapper
 {
@@ -34,7 +36,7 @@ namespace GravatarWrapper
         {
             var client = new RestClient("http://www.gravatar.com/avatar/" + HashEmailForGravatar(email));
             var req = new RestRequest(Method.GET);
-            if (ShowDefaultImage) req.AddParameter("d", "%22%22" );
+            if (!ShowDefaultImage) req.AddParameter("d", "%22%22" );
             req.AddParameter("s", size);
             var res = client.Execute(req);
             if (res != null)
@@ -47,7 +49,7 @@ namespace GravatarWrapper
                 }
                 
             }
-            return null;
+            throw new NoResponseReturnedException();
         }
     }
 }
