@@ -30,19 +30,22 @@ namespace GravatarWrapper
             return sBuilder.ToString();  // Return the hexadecimal string. 
         }
 
-        public static Bitmap Request(string email, int size)
+        public static Bitmap Request(string email, int size, bool ShowDefaultImage)
         {
             var client = new RestClient("http://www.gravatar.com/avatar/" + HashEmailForGravatar(email));
             var req = new RestRequest(Method.GET);
-            req.AddParameter("d", "%22%22" );
+            if (ShowDefaultImage) req.AddParameter("d", "%22%22" );
             req.AddParameter("s", size);
             var res = client.Execute(req);
             if (res != null)
             {
                 var imagebytes = res.RawBytes;
-                var ms = new MemoryStream(imagebytes);
-                return new Bitmap(ms);
-                //img.Save(@"c:\bmp.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+                //IDisposable implementation
+                using (var ms = new MemoryStream(imagebytes))
+                {
+                    return new Bitmap(ms);
+                }
+                
             }
             return null;
         }
