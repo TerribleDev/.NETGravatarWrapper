@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace GravatarWrapper.Exceptions
 {
-    class NoResponseReturnedException : Exception
+    class NoResponseFoundException : Exception
     {
-        public NoResponseReturnedException()
+        public NoResponseFoundException()
             : base("No response returned from server"){}
     }
 }

@@ -7,7 +7,6 @@ using System.Security.Cryptography;
 using RestSharp;
 using System.Drawing;
 using System.IO;
-using GravatarWrapper;
 using GravatarWrapper.Exceptions;
 
 namespace GravatarWrapper
@@ -41,14 +40,10 @@ namespace GravatarWrapper
             if (res != null)
             {
                 var imagebytes = res.RawBytes;
-                //IDisposable implementation
-                using (var ms = new MemoryStream(imagebytes))
-                {
-                    return new Bitmap(ms);
-                }
-                
+                var ms = new MemoryStream(imagebytes);
+                return new Bitmap(ms);
             }
-            throw new NoResponseReturnedException();
+            throw new NoResponseFoundException();
         }
     }
 }
